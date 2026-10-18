@@ -1,0 +1,13 @@
+{
+  "name": "Cubby & Sort",
+  "short_name": "Cubby & Sort",
+  "description": "Small bathroom storage ideas for renters and owners",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F5",
+  "theme_color": "#BF6B3A",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

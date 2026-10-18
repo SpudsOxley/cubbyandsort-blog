@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = 'October 1, 2026';
+---
+
+<Base title="Disclaimer" description="Disclaimer for Cubby & Sort." noindex={true}>
+  <Header />
+  <main class="static-main">
+    <div class="container container--narrow">
+      <h1 class="page-title">Disclaimer</h1>
+      <p class="updated">Last updated: {lastUpdated}</p>
+
+      <h2>Affiliate disclaimer</h2>
+      <p>Cubby &amp; Sort participates in affiliate programs including the Amazon Associates Program. We earn a small commission when you click a link and make a purchase, at no additional cost to you. Affiliate relationships do not influence our recommendations — we only link to products we would genuinely use.</p>
+
+      <h2>Accuracy</h2>
+      <p>The information on this site is provided for general informational purposes. Product availability, prices, and specifications change over time. Always verify information before making a purchase or undertaking a home improvement project.</p>
+
+      <h2>Renter advice</h2>
+      <p>Before making any modifications to a rental property, always check your lease agreement and consult your landlord. We are not responsible for any damage, disputes, or deposit deductions resulting from following advice on this site.</p>
+
+      <h2>External links</h2>
+      <p>This site links to third-party websites. We are not responsible for their content, accuracy, or privacy practices.</p>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .static-main { padding-block: var(--space-12) var(--space-16); }
+  .page-title { font-family: var(--font-display); font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl)); font-weight: 700; color: var(--clr-text); margin-bottom: var(--space-2); }
+  .updated { font-size: var(--text-sm); color: var(--clr-text-muted); margin-bottom: var(--space-8); }
+  .container--narrow h2 { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; color: var(--clr-text); margin-block: var(--space-8) var(--space-4); }
+  .container--narrow p { margin-bottom: var(--space-4); color: var(--clr-text-muted); line-height: 1.7; }
+</style>

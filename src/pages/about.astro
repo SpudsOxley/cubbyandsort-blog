@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="About" description="About Cubby & Sort — a blog about small bathroom storage for renters and owners.">
+  <Header currentPath="/about" />
+
+  <main class="static-main">
+    <div class="container container--narrow">
+      <h1 class="page-title">About Cubby & Sort</h1>
+
+      <p class="lead">Small bathrooms are a puzzle. Whether you're renting and can't touch the walls, or you own and want to maximize every inch, the challenge is the same: too much stuff, not enough space.</p>
+
+      <p>Cubby &amp; Sort exists to solve that puzzle with real, practical ideas — not aspirational renovations that require a contractor and a big budget.</p>
+
+      <h2>What you'll find here</h2>
+      <ul>
+        <li><strong>Renter-friendly storage</strong> — no drilling, no damage, no lost deposits</li>
+        <li><strong>Small bathroom ideas</strong> — layouts and tricks that actually work in tight spaces</li>
+        <li><strong>Honest product reviews</strong> — tested picks, not just affiliate filler</li>
+        <li><strong>Owner upgrades</strong> — permanent improvements worth the investment</li>
+      </ul>
+
+      <h2>Our approach</h2>
+      <p>Every post on this site goes through a simple test: does this actually work in a small bathroom? We focus on solutions under $100, products available at major retailers, and ideas that take a weekend at most to execute.</p>
+
+      <h2>Affiliate disclosure</h2>
+      <p>Some links on this site are affiliate links. If you buy something through one of them, we earn a small commission at no extra cost to you. We only recommend products we'd genuinely use.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .static-main { padding-block: var(--space-12) var(--space-16); }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-bottom: var(--space-6);
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--clr-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+    max-width: 58ch;
+  }
+
+  .container--narrow h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-block: var(--space-8) var(--space-4);
+  }
+
+  .container--narrow p { margin-bottom: var(--space-4); color: var(--clr-text-muted); line-height: 1.7; }
+  .container--narrow ul { padding-left: var(--space-6); color: var(--clr-text-muted); line-height: 1.8; }
+  .container--narrow li { margin-bottom: var(--space-2); }
+  .container--narrow strong { color: var(--clr-text); }
+</style>

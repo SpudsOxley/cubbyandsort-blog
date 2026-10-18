@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Contact" description="Get in touch with Cubby & Sort.">
+  <Header currentPath="/contact" />
+  <main class="static-main">
+    <div class="container container--narrow">
+      <h1 class="page-title">Contact</h1>
+      <p class="lead">Have a question, a product recommendation, or want to collaborate? Reach out.</p>
+
+      <form class="contact-form" name="contact" method="POST" data-netlify="true">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="general">General question</option>
+            <option value="collaboration">Collaboration / PR</option>
+            <option value="correction">Content correction</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send message</button>
+      </form>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .static-main { padding-block: var(--space-12) var(--space-16); }
+  .page-title { font-family: var(--font-display); font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl)); font-weight: 700; color: var(--clr-text); margin-bottom: var(--space-3); }
+  .lead { font-size: var(--text-lg); color: var(--clr-text-muted); line-height: 1.6; margin-bottom: var(--space-8); max-width: 48ch; }
+
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-5); max-width: 520px; }
+
+  .field { display: flex; flex-direction: column; gap: var(--space-2); }
+
+  label { font-size: var(--text-sm); font-weight: 700; color: var(--clr-text); }
+
+  input, select, textarea {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--clr-text);
+    background: var(--clr-surface);
+    border: 1.5px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--clr-accent);
+  }
+
+  textarea { resize: vertical; min-height: 140px; }
+
+  .submit-btn {
+    background: var(--clr-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-8);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.15s;
+  }
+
+  .submit-btn:hover { background: var(--clr-accent-dark); }
+</style>

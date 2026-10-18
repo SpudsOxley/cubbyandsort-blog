@@ -1,0 +1,171 @@
+/* ============================================================
+   Cubby & Sort — Global Design System
+   Warm, Pinterest-familiar, renter + owner bathroom niche
+   ============================================================ */
+
+/* --- Tokens ------------------------------------------------- */
+:root {
+  /* Palette: warm linen + terracotta + slate */
+  --clr-bg:          #FAF8F5;
+  --clr-surface:     #FFFFFF;
+  --clr-surface-alt: #F3EFE8;
+  --clr-border:      #E4DDD3;
+  --clr-text:        #1E1A16;
+  --clr-text-muted:  #7A6F65;
+  --clr-accent:      #BF6B3A;
+  --clr-accent-soft: #F5EAE0;
+  --clr-accent-dark: #9A5229;
+  --clr-link:        #7A4F2E;
+  --clr-tag-bg:      #EDE8E0;
+  --clr-tag-text:    #6B5D50;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Lato', system-ui, -apple-system, sans-serif;
+
+  /* Type scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --max-w-content: 740px;
+  --max-w-wide:    1100px;
+  --sidebar-w:     300px;
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.06);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --clr-bg:          #1A1714;
+    --clr-surface:     #242018;
+    --clr-surface-alt: #2C2820;
+    --clr-border:      #3A342C;
+    --clr-text:        #F0EBE4;
+    --clr-text-muted:  #9C9188;
+    --clr-accent:      #D4845A;
+    --clr-accent-soft: #2A1E14;
+    --clr-accent-dark: #E8A07A;
+    --clr-link:        #D4845A;
+    --clr-tag-bg:      #2C2820;
+    --clr-tag-text:    #B5A898;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --clr-bg:          #1A1714;
+  --clr-surface:     #242018;
+  --clr-surface-alt: #2C2820;
+  --clr-border:      #3A342C;
+  --clr-text:        #F0EBE4;
+  --clr-text-muted:  #9C9188;
+  --clr-accent:      #D4845A;
+  --clr-accent-soft: #2A1E14;
+  --clr-accent-dark: #E8A07A;
+  --clr-link:        #D4845A;
+  --clr-tag-bg:      #2C2820;
+  --clr-tag-text:    #B5A898;
+  color-scheme: dark;
+}
+
+/* --- Reset -------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--clr-text);
+  background: var(--clr-bg);
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: var(--clr-link); }
+a:hover { color: var(--clr-accent); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--clr-text);
+}
+
+/* --- Utilities ---------------------------------------------- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-w-wide);
+  margin-inline: auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+
+.container--narrow {
+  max-width: var(--max-w-content);
+}
+
+/* --- Ad slot placeholders ----------------------------------- */
+.ad-slot {
+  width: 100%;
+  min-height: 90px;
+  background: var(--clr-surface-alt);
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  color: var(--clr-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-block: var(--space-8);
+}
+
+/* --- Focus visible ------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- Reduced motion ----------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

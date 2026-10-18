@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const categories = [
+    { slug: 'bathroom-storage', label: 'Bathroom Storage', description: 'Smart storage ideas to maximize every inch of your bathroom.' },
+    { slug: 'small-bathroom-ideas', label: 'Small Bathroom Ideas', description: 'Make the most of a small bathroom with clever layouts and storage tricks.' },
+    { slug: 'renter-friendly', label: 'Renter-Friendly', description: 'No-drill, no-damage storage solutions that protect your deposit.' },
+    { slug: 'owner-updates', label: 'Owner Updates', description: 'Permanent bathroom upgrades that add value and function.' },
+    { slug: 'organization-tips', label: 'Organization Tips', description: 'Systems and habits that keep your bathroom tidy for good.' },
+    { slug: 'product-reviews', label: 'Product Reviews', description: 'Honest reviews of bathroom storage products we actually tested.' },
+  ];
+  return categories.map(cat => ({ params: { category: cat.slug }, props: cat }));
+}
+
+const { slug, label, description } = Astro.props;
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter(p => p.data.category === slug)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Base title={`${label} Ideas`} description={description}>
+  <Header currentPath={`/category/${slug}`} />
+
+  <main>
+    <section class="cat-hero">
+      <div class="container">
+        <p class="eyebrow"><a href="/">Home</a> / Categories</p>
+        <h1 class="cat-title">{label}</h1>
+        <p class="cat-desc">{description}</p>
+      </div>
+    </section>
+
+    <section class="posts-section">
+      <div class="container">
+        {posts.length > 0 ? (
+          <div class="posts-grid">
+            {posts.map(post => (
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                slug={post.slug}
+                heroImage={post.data.heroImage}
+                heroAlt={post.data.heroAlt}
+                category={post.data.category}
+                publishDate={post.data.publishDate}
+                tags={post.data.tags}
+                pinterestDescription={post.data.pinterestDescription}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="empty-state">
+            <p>No posts in this category yet — check back soon!</p>
+            <a href="/" class="back-link">← Back to home</a>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .cat-hero {
+    background: var(--clr-accent-soft);
+    border-bottom: 1px solid var(--clr-border);
+    padding-block: var(--space-12);
+  }
+
+  .eyebrow {
+    font-size: var(--text-xs);
+    color: var(--clr-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .eyebrow a { color: var(--clr-text-muted); text-decoration: none; }
+  .eyebrow a:hover { color: var(--clr-accent); }
+
+  .cat-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-bottom: var(--space-3);
+  }
+
+  .cat-desc {
+    font-size: var(--text-lg);
+    color: var(--clr-text-muted);
+    max-width: 52ch;
+  }
+
+  .posts-section { padding-block: var(--space-12); }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding-block: var(--space-16);
+    color: var(--clr-text-muted);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    color: var(--clr-accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } }
+</style>

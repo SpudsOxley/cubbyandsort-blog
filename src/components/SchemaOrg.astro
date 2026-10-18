@@ -1,0 +1,51 @@
+---
+interface Props {
+  type: 'BlogPosting' | 'WebPage' | 'WebSite';
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  publishDate?: Date;
+  updatedDate?: Date;
+  authorName?: string;
+}
+
+const {
+  type,
+  title,
+  description,
+  url,
+  image,
+  publishDate,
+  updatedDate,
+  authorName = 'Cubby & Sort',
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': type,
+  name: title,
+  headline: title,
+  description,
+  url,
+  ...(image && { image: { '@type': 'ImageObject', url: image } }),
+  ...(publishDate && { datePublished: publishDate.toISOString() }),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  author: {
+    '@type': 'Organization',
+    name: authorName,
+    url: 'https://cubbyandsort.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cubby & Sort',
+    url: 'https://cubbyandsort.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://cubbyandsort.com/logo.png',
+    },
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

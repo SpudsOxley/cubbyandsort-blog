@@ -1,0 +1,185 @@
+---
+const year = new Date().getFullYear();
+
+const footerLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Disclaimer', href: '/disclaimer' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const categories = [
+  { label: 'Bathroom Storage', href: '/category/bathroom-storage' },
+  { label: 'Renter-Friendly', href: '/category/renter-friendly' },
+  { label: 'Small Bathrooms', href: '/category/small-bathroom-ideas' },
+  { label: 'Owner Updates', href: '/category/owner-updates' },
+  { label: 'Organization Tips', href: '/category/organization-tips' },
+  { label: 'Product Reviews', href: '/category/product-reviews' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <a href="/" class="brand-link">
+        <span class="brand-icon" aria-hidden="true">🛁</span>
+        <span class="brand-name">Cubby <span>&amp;</span> Sort</span>
+      </a>
+      <p class="brand-desc">
+        Practical bathroom storage ideas for real spaces — whether you rent or own.
+        No drilling required (unless you want to).
+      </p>
+      <div class="social-row">
+        <a href="https://pinterest.com" target="_blank" rel="noopener" class="social-btn" aria-label="Follow on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          Pinterest
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="footer-heading">Categories</h3>
+      <ul role="list">
+        {categories.map(c => (
+          <li><a href={c.href}>{c.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="footer-heading">Site</h3>
+      <ul role="list">
+        {footerLinks.map(l => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+      <p class="disclosure">
+        This site participates in affiliate programs and may earn a commission on qualifying purchases at no extra cost to you.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© {year} Cubby &amp; Sort. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--clr-surface);
+    border-top: 1px solid var(--clr-border);
+    margin-top: var(--space-16);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: var(--space-12);
+    padding-block: var(--space-12);
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    margin-bottom: var(--space-3);
+  }
+
+  .brand-icon { font-size: 1.25rem; }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--clr-text);
+  }
+
+  .brand-name span { color: var(--clr-accent); }
+
+  .brand-desc {
+    font-size: var(--text-sm);
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    max-width: 32ch;
+    margin-bottom: var(--space-4);
+  }
+
+  .social-row {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: #E60023;
+    color: white;
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: opacity 0.15s;
+  }
+
+  .social-btn:hover { opacity: 0.85; color: white; }
+
+  .footer-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-col a {
+    font-size: var(--text-sm);
+    color: var(--clr-text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-col a:hover { color: var(--clr-accent); }
+
+  .disclosure {
+    font-size: 0.7rem;
+    color: var(--clr-text-muted);
+    line-height: 1.5;
+    margin-top: var(--space-6);
+    opacity: 0.8;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--clr-border);
+    padding-block: var(--space-4);
+  }
+
+  .footer-bottom p {
+    font-size: var(--text-xs);
+    color: var(--clr-text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      padding-block: var(--space-8);
+    }
+  }
+</style>

@@ -1,0 +1,395 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const featuredPosts = sortedPosts.filter(p => p.data.featured).slice(0, 3);
+const recentPosts = sortedPosts.slice(0, 9);
+
+const categories = [
+  { label: 'Bathroom Storage', href: '/category/bathroom-storage', icon: '🪣', desc: 'Shelves, baskets & cabinets' },
+  { label: 'Renter-Friendly', href: '/category/renter-friendly', icon: '🔑', desc: 'No drilling required' },
+  { label: 'Small Bathrooms', href: '/category/small-bathroom-ideas', icon: '📐', desc: 'Maximize every inch' },
+  { label: 'Owner Updates', href: '/category/owner-updates', icon: '🔨', desc: 'Permanent improvements' },
+  { label: 'Organization Tips', href: '/category/organization-tips', icon: '✨', desc: 'Systems that stick' },
+  { label: 'Product Reviews', href: '/category/product-reviews', icon: '⭐', desc: 'Honest picks' },
+];
+---
+
+<Base
+  title="Small Bathroom Storage & Organization Ideas"
+  description="Practical bathroom storage ideas for renters and owners. Small space solutions that actually work — no drilling required."
+  type="website"
+>
+  <SchemaOrg
+    type="WebSite"
+    title="Cubby & Sort — Small Bathroom, Big Ideas"
+    description="Practical bathroom storage ideas for renters and owners."
+    url="https://cubbyandsort.com"
+  />
+
+  <Header currentPath="/" />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Small Bathroom, Big Ideas</p>
+          <h1 class="hero-heading">Storage solutions for bathrooms that actually work</h1>
+          <p class="hero-sub">Whether you rent or own, we have practical ideas to organize every inch of your bathroom — without blowing your budget or your deposit.</p>
+          <div class="hero-actions">
+            <a href="/category/renter-friendly" class="btn btn--primary">Renter-Friendly Ideas</a>
+            <a href="/category/bathroom-storage" class="btn btn--ghost">All Storage Ideas</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-tiles">
+            <div class="hero-tile hero-tile--a">🪣</div>
+            <div class="hero-tile hero-tile--b">🛁</div>
+            <div class="hero-tile hero-tile--c">✨</div>
+            <div class="hero-tile hero-tile--d">📐</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot — top -->
+    <div class="container">
+      <div class="ad-slot" aria-label="Advertisement">Advertisement</div>
+    </div>
+
+    <!-- Categories strip -->
+    <section class="categories-section">
+      <div class="container">
+        <h2 class="section-title">Browse by Category</h2>
+        <div class="categories-grid">
+          {categories.map(cat => (
+            <a href={cat.href} class="cat-card">
+              <span class="cat-icon" aria-hidden="true">{cat.icon}</span>
+              <span class="cat-label">{cat.label}</span>
+              <span class="cat-desc">{cat.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured posts -->
+    {featuredPosts.length > 0 && (
+      <section class="posts-section">
+        <div class="container">
+          <h2 class="section-title">Featured Posts</h2>
+          <div class="posts-grid posts-grid--featured">
+            {featuredPosts.map(post => (
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                slug={post.slug}
+                heroImage={post.data.heroImage}
+                heroAlt={post.data.heroAlt}
+                category={post.data.category}
+                publishDate={post.data.publishDate}
+                tags={post.data.tags}
+                featured={post.data.featured}
+                pinterestDescription={post.data.pinterestDescription}
+                size="large"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Ad slot — mid -->
+    <div class="container">
+      <div class="ad-slot" aria-label="Advertisement">Advertisement</div>
+    </div>
+
+    <!-- Recent posts -->
+    <section class="posts-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Latest Ideas</h2>
+          <a href="/posts" class="see-all">See all posts →</a>
+        </div>
+        <div class="posts-grid">
+          {recentPosts.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              slug={post.slug}
+              heroImage={post.data.heroImage}
+              heroAlt={post.data.heroAlt}
+              category={post.data.category}
+              publishDate={post.data.publishDate}
+              tags={post.data.tags}
+              pinterestDescription={post.data.pinterestDescription}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pinterest CTA -->
+    <section class="pinterest-cta">
+      <div class="container">
+        <div class="pinterest-inner">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#E60023" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          <div>
+            <h2 class="pinterest-title">Save ideas for later</h2>
+            <p class="pinterest-sub">Follow Cubby &amp; Sort on Pinterest for daily bathroom organization inspiration.</p>
+          </div>
+          <a href="https://pinterest.com" target="_blank" rel="noopener" class="btn btn--pinterest">
+            Follow on Pinterest
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot — bottom -->
+    <div class="container">
+      <div class="ad-slot" aria-label="Advertisement">Advertisement</div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--clr-accent-soft) 0%, var(--clr-bg) 60%);
+    border-bottom: 1px solid var(--clr-border);
+    padding-block: var(--space-16);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--clr-text);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-sub {
+    font-size: var(--text-lg);
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    max-width: 46ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .btn--primary {
+    background: var(--clr-accent);
+    color: white;
+  }
+  .btn--primary:hover { background: var(--clr-accent-dark); color: white; }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--clr-text);
+    border: 1.5px solid var(--clr-border);
+  }
+  .btn--ghost:hover { border-color: var(--clr-accent); color: var(--clr-accent); }
+
+  .btn--pinterest {
+    background: #E60023;
+    color: white;
+    flex-shrink: 0;
+  }
+  .btn--pinterest:hover { background: #c0001d; color: white; }
+
+  /* Hero visual */
+  .hero-visual { display: flex; align-items: center; justify-content: center; }
+
+  .hero-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .hero-tile {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    font-size: 3rem;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-tile--b { margin-top: var(--space-6); }
+  .hero-tile--c { margin-top: calc(-1 * var(--space-6)); }
+
+  /* Section headings */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-header .section-title { margin-bottom: 0; }
+
+  .see-all {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--clr-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .see-all:hover { color: var(--clr-accent-dark); }
+
+  /* Categories */
+  .categories-section { padding-block: var(--space-12); }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
+  }
+
+  .cat-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .cat-card:hover {
+    border-color: var(--clr-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .cat-icon { font-size: 1.75rem; }
+
+  .cat-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--clr-text);
+  }
+
+  .cat-desc {
+    font-size: var(--text-xs);
+    color: var(--clr-text-muted);
+    line-height: 1.4;
+  }
+
+  /* Posts grid */
+  .posts-section { padding-block: var(--space-12); }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .posts-grid--featured {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  /* Pinterest CTA */
+  .pinterest-cta {
+    background: var(--clr-surface-alt);
+    border-top: 1px solid var(--clr-border);
+    border-bottom: 1px solid var(--clr-border);
+    padding-block: var(--space-10);
+  }
+
+  .pinterest-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .pinterest-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--clr-text);
+    margin-bottom: var(--space-1);
+  }
+
+  .pinterest-sub {
+    font-size: var(--text-sm);
+    color: var(--clr-text-muted);
+    margin: 0;
+  }
+
+  .pinterest-inner > div { flex: 1; min-width: 200px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .categories-grid { grid-template-columns: repeat(3, 1fr); }
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    .posts-grid { grid-template-columns: 1fr; }
+    .hero { padding-block: var(--space-10); }
+  }
+</style>
