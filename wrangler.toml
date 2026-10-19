@@ -1,6 +1,7 @@
-[build]
-  command = "npm run build"
-  destination = "dist"
+name = "cubbyandsort-blog"
+compatibility_date = "2024-08-01"
+pages_build_output_dir = "./dist/client"
 
-[build.environment]
-  NODE_VERSION = "20"
+[vars]
+PUBLIC_KEYSTATIC_GITHUB_CLIENT_ID = ""
+PUBLIC_ADSENSE_ID = ""

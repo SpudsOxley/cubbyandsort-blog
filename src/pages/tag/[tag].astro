@@ -5,6 +5,8 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/PostCard.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
   const tagSet = new Set<string>();

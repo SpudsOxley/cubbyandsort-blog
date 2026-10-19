@@ -3,7 +3,7 @@ import { config, fields, collection } from '@keystatic/core';
 export default config({
   storage: {
     kind: 'github',
-    repo: 'YOUR_GITHUB_USERNAME/cubbyandsort-blog',
+    repo: 'SpudsOxley/cubbyandsort-blog',
   },
   ui: {
     brand: {
